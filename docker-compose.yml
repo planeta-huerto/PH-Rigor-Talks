@@ -4,9 +4,13 @@ services:
   webserver:
     build: .
     container_name: ph-temperature
+    extra_hosts:
+      - "satis.planetahuerto.es:35.233.5.100"
     ports:
-      - "8282:80"
+      - "80:80"
     volumes:
       - ./:/var/www/html
+      - .composer-global/composer.json:/root/.composer/composer.json
+      - .ssh/id_rsa:/root/.ssh/id_rsa
     environment:
       XDEBUG_CONFIG: remote_host=host.docker.internal

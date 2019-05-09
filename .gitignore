@@ -1,9 +1,7 @@
 #phpstorm
 .idea
-
+.ssh/id_rsa
 #composer
-/vendor/
-
-#project
-/.ssh/
-/.php_cs.cache
+vendor
+composer.lock
+.php_cs.cache
