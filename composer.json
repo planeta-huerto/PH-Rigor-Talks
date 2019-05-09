@@ -1,0 +1,27 @@
+{
+  "name": "planeta-huerto/rigor-talk-temperature",
+  "license": "MIT",
+  "type": "project",
+  "description": "Skeleton for Temperature refactoring",
+
+  "require": {
+    "php": "5.6.*",
+    "ext-sqlite3": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5"
+  },
+  "autoload": {
+    "psr-4": {
+      "PH\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PH\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

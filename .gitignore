@@ -1,0 +1,9 @@
+#phpstorm
+.idea
+
+#composer
+/vendor/
+
+#project
+/.ssh/
+/.php_cs.cache

@@ -1,0 +1,12 @@
+version: '3'
+services:
+  #Web-service
+  webserver:
+    build: .
+    container_name: ph-temperature
+    ports:
+      - "8282:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal
