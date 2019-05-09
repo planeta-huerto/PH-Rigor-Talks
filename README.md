@@ -95,28 +95,28 @@ Como somos benevolentes hemos contratado un formador online especialmente para q
 
 Sigue los vídeos de Carlos Buenosvinos:
 
--[ ] [#1 - Guard Clauses](https://youtu.be/Ttk9fDGwjrY)
--[ ] [#2 - Self-Encapsulation (Spanish)](https://youtu.be/4PVUiMOVl5w)
--[ ] [#3 - Named Constructors I](https://youtu.be/LjEG7AR-MOg)
--[ ] [#4 - Named Constructors II](https://youtu.be/RE3cAEFSsDc)
--[ ] [#5 - Named Constructors III](https://youtu.be/w2CfVDtQGc0)
--[ ] [#6 - Named Constructors IV ](https://youtu.be/210Ed5PeK4g)
--[ ] [#7 - Test Class](https://youtu.be/8UFAyC173JU)
--[ ] [#8 - Self-Shunt ](https://youtu.be/Ds-Iop1zB24)
--[ ] [#9 - Self-Shunt II (PHP7)](https://youtu.be/gpUDgEVw9tM)
--[ ] [#10 - Self-Shunt III](https://youtu.be/e35igS90MkI)
--[ ] [#11 - Immutability ](https://youtu.be/577bfQMI5GY)
+- [ ] [#1 - Guard Clauses](https://youtu.be/Ttk9fDGwjrY)
+- [ ] [#2 - Self-Encapsulation (Spanish)](https://youtu.be/4PVUiMOVl5w)
+- [ ] [#3 - Named Constructors I](https://youtu.be/LjEG7AR-MOg)
+- [ ] [#4 - Named Constructors II](https://youtu.be/RE3cAEFSsDc)
+- [ ] [#5 - Named Constructors III](https://youtu.be/w2CfVDtQGc0)
+- [ ] [#6 - Named Constructors IV ](https://youtu.be/210Ed5PeK4g)
+- [ ] [#7 - Test Class](https://youtu.be/8UFAyC173JU)
+- [ ] [#8 - Self-Shunt ](https://youtu.be/Ds-Iop1zB24)
+- [ ] [#9 - Self-Shunt II (PHP7)](https://youtu.be/gpUDgEVw9tM)
+- [ ] [#10 - Self-Shunt III](https://youtu.be/e35igS90MkI)
+- [ ] [#11 - Immutability ](https://youtu.be/577bfQMI5GY)
 
 
 ###IMPLEMENTACIÓN DE MEJORAS
 Tareas:
--[ ] Intentar separar los conceptos de Dominio, Aplicación e Infraestructura. Según la arquitectura hexagonal.
--[ ] Aplica Clean Code
--[ ] Aplica principios SOLID
--[ ] Utiliza servicios con Pimple.
--[ ] Utiliza el Api de Aemet para obtener la temperatura del día actual. 
+- [ ] Intentar separar los conceptos de Dominio, Aplicación e Infraestructura. Según la arquitectura hexagonal.
+- [ ] Aplica Clean Code
+- [ ] Aplica principios SOLID
+- [ ] Utiliza servicios con Pimple.
+- [ ] Utiliza el Api de Aemet para obtener la temperatura del día actual. 
     - [API Aemet ](https://opendata.aemet.es/centrodedescargas/inicio)
--[ ] Crea comandos de Symfony para saber si dada una temperatura es muy caliente o muy helada.
+- [ ] Crea comandos de Symfony para saber si dada una temperatura es muy caliente o muy helada.
 
 
 Se pueden utilizar las librerías que se consideren en la rama de desarrollo.
