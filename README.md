@@ -1,22 +1,22 @@
-#PROYECTO DE TEMPERATURA
+# PROYECTO DE TEMPERATURA
 Bienvenido al gestionador de temperatura de Planeto Huerto. 
 Para poder controlar correctamente el crecimiento de nuestros de los Bonsais, hemos creado una aplicación que nos ayude reconocer que temperaturas son  muy calientes o muy frías para nuestros bonsais. Por esta razón tenemos que controlar el parámetro de temperatura. 
 
 
-##PUESTA EN MARCHA
+## PUESTA EN MARCHA
 A lo largo de esta documentación hay puntos que tienes que realizar
 
 Cuando lo tengas realizado, puedes marcar los en el README de este modo.
 [x] Visto
 
 
-###DESCARGA EL REPOSITORIO
+### DESCARGA EL REPOSITORIO
 
 Tareas:
 - [ ] Clona el repositorio [Repositorio en GitHub](https://github.com/planetahuerto/rigortalks)
 - [ ] Crea una rama con tu nombre. (Ejemplo “marcos-ph”)
 
-###ORGANIZACIÓN DEL CÓDIGO
+### ORGANIZACIÓN DEL CÓDIGO
 Ahora que ya tienes el proyecto en tu mano, dentro de “src” está la lógica del desarrollar y 
 en la carpeta “test” estás los asserts para testear el código existente.
 
@@ -38,7 +38,7 @@ Ficheros de configuración del proyecto
 - Makefile
     - En este fichero están comprendidos todos los comandos docker-compose que necesitas.
 
-##COMANDOS DOCKER EN EL FICHERO “Makefile”
+## COMANDOS DOCKER EN EL FICHERO “Makefile”
 
 Para crear y arrancar el contenedor con la información que se refleja en los ficheros de configuración “docker-compose.yml” y “Dockerfile”. Este comando solo es necesario la utilizarlo para crear el contenedor. Utiliza el comando:
 
@@ -79,17 +79,17 @@ Tareas:
 - [ ] Probar los test
 - [ ] Probar la covertura 
 
-###BASE DE DATOS
+### BASE DE DATOS
 Existe una base de datos SQLite llamada “configure” con dos tablas. 
 - hot_threshold
 - cold_threshold
 
-##MANOS A LA OBRA
+## MANOS A LA OBRA
 
 En este apartado se describe el trabajo que se tiene que realizar.
 
 
-###REFACTORING INICIAL
+### REFACTORING INICIAL
 Una primera parte consiste en Refactorizar el código existente, de esta forma luego podremos implementar mejoras. 
 Como somos benevolentes hemos contratado un formador online especialmente para que te ayude en estos primeros pasos.
 
@@ -108,7 +108,7 @@ Sigue los vídeos de Carlos Buenosvinos:
 -[ ] [#11 - Immutability ](https://youtu.be/577bfQMI5GY)
 
 
-###IMPLEMENTACIÓN DE MEJORAS
+### IMPLEMENTACIÓN DE MEJORAS
 Tareas:
 -[ ] Intentar separar los conceptos de Dominio, Aplicación e Infraestructura. Según la arquitectura hexagonal.
 -[ ] Aplica Clean Code
@@ -122,7 +122,7 @@ Tareas:
 Se pueden utilizar las librerías que se consideren en la rama de desarrollo.
 El proyecto debe quedar totalmente funcional, cualquier persona del equipo que se descargue el proyecto e instale las dependencias debe hacerlo funcionar y pasar los tests sin problemas.
 
-##RECOMENDACIONES PARA EL CÓDIGO
+## RECOMENDACIONES PARA EL CÓDIGO
 Aplica la imaginación: como mejorar lo que ya hay, aplicar patrones de diseño y de testing, añadir funcionalidad extra, posibilidad de ejecutar por línea de comandos, refactorizar, etc.
 	
 
