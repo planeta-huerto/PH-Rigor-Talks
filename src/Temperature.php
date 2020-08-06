@@ -12,8 +12,14 @@ class Temperature
 
     public function __construct($measure)
     {
+        $this->setMeasure($measure);
+    }
+
+    private function setMeasure($measure)
+    {
+
         $this->checkMeasureIsPositive($measure); // Guard Clauses: metodos que comprueban las excepciones antes de hacer
-                                                    // algun tipo de asignacion
+        // algun tipo de asignacion
         $this->measure = $measure;
     }
 
@@ -28,11 +34,6 @@ class Temperature
         }
     }
 
-    public function setMeasure($measure)
-    {
-
-        $this->measure = $measure;
-    }
 
     public function measure()
     {
