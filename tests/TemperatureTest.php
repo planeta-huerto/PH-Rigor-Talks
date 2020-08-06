@@ -10,7 +10,9 @@ use PH\TemperatureNegativeException;
 use PH\TemperatureTestClass;
 use PHPUnit_Framework_TestCase;
 
-class ColdThresholdSourceTest implements ColdThresholdSource{
+final class ColdThresholdSourceTest implements ColdThresholdSource
+{
+
     public function getThreshold()
     {
         return 50;
@@ -142,6 +144,24 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
     {
         $this->markTestSkipped();
 
+        $this->assertSame(
+            50,
+            Temperature::fromStation(
+                $this
+            )->measure()
+        );
+    }
+
+    public function sensor(){
+        return $this;
+    }
+
+    public function temperature(){
+        return $this;
+    }
+
+    public function measure(){
+        return 50;
     }
 
     /**

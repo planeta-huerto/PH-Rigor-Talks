@@ -104,7 +104,7 @@ Sigue los vídeos de Carlos Buenosvinos:
 - [x] [#7 - Test Class](https://youtu.be/8UFAyC173JU)
 - [x] [#8 - Self-Shunt ](https://youtu.be/Ds-Iop1zB24)
 - [x] [#9 - Self-Shunt II (PHP7)](https://youtu.be/gpUDgEVw9tM)
-- [ ] [#10 - Self-Shunt III](https://youtu.be/e35igS90MkI)
+- [x] [#10 - Self-Shunt III](https://youtu.be/e35igS90MkI)
 - [ ] [#11 - Immutability ](https://youtu.be/577bfQMI5GY)
 
 
