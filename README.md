@@ -100,7 +100,7 @@ Sigue los vídeos de Carlos Buenosvinos:
 - [x] [#3 - Named Constructors I](https://youtu.be/LjEG7AR-MOg)
 - [x] [#4 - Named Constructors II](https://youtu.be/RE3cAEFSsDc)
 - [x] [#5 - Named Constructors III](https://youtu.be/w2CfVDtQGc0)
-- [] [#6 - Named Constructors IV ](https://youtu.be/210Ed5PeK4g)
+- [x] [#6 - Named Constructors IV ](https://youtu.be/210Ed5PeK4g)
 - [ ] [#7 - Test Class](https://youtu.be/8UFAyC173JU)
 - [ ] [#8 - Self-Shunt ](https://youtu.be/Ds-Iop1zB24)
 - [ ] [#9 - Self-Shunt II (PHP7)](https://youtu.be/gpUDgEVw9tM)
