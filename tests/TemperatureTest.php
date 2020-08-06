@@ -6,6 +6,7 @@ namespace PH\Tests;
 use PH\ColdThreshold;
 use PH\Temperature;
 use PH\TemperatureNegativeException;
+use PH\TemperatureTestClass;
 use PHPUnit_Framework_TestCase;
 
 class TemperatureTest extends PHPUnit_Framework_TestCase
@@ -57,7 +58,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function tryToCheckIfAColdTemperatureIsSuperHot()
     {
-        $temperature = Temperature::take(105);
+        $temperature = TemperatureTestClass::take(105);
         $this->assertTrue(
             $temperature->isSuperHot()
         );
@@ -68,7 +69,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function tryToCheckIfAColdTemperatureNotIsSuperHot()
     {
-        $temperature = Temperature::take(50);
+        $temperature = TemperatureTestClass::take(50);
         $this->assertFalse(
             $temperature->isSuperHot()
         );

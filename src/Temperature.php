@@ -10,6 +10,14 @@ class Temperature
 {
     private $measure;
 
+    /**
+     * Named Constructor, permite codigo mucho mas alineado  con nuestro lenguaje de negocio
+     */
+    public static function take($measure){
+        return new self($measure);
+        // return new static($measure);
+    }
+
     private function __construct($measure)
     {
         $this->setMeasure($measure);
@@ -38,14 +46,6 @@ class Temperature
         }
     }
 
-    /**
-     * Named Constructor, permite codigo mucho mas alineado  con nuestro lenguaje de negocio
-     */
-    public static function take($measure){
-        return new self($measure);
-        // return new static($measure);
-    }
-
     public function measure()
     {
         return $this->measure;
@@ -53,8 +53,7 @@ class Temperature
 
     public function isSuperHot()
     {
-        $bd = new SQLite3('tests/db/temperature.db');
-        $threshold = $bd->querySingle('SELECT hot_threshold FROM configure');
+        $threshold = $this->getThreshold();
 
         return $this->measure() > $threshold;
 
@@ -83,6 +82,16 @@ class Temperature
         $this->setMeasure($sum);
     }
 
+    /**
+     * @return mixed
+     */
+    protected function getThreshold() // Este metodo tiene la insfraestructura
+    {
+        $bd        = new SQLite3('tests/db/temperature.db');
+        $threshold = $bd->querySingle('SELECT hot_threshold FROM configure');
+
+        return $threshold;
+    }
 
 
 }
