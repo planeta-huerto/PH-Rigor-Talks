@@ -10,6 +10,13 @@ use PH\TemperatureNegativeException;
 use PH\TemperatureTestClass;
 use PHPUnit_Framework_TestCase;
 
+class ColdThresholdSourceTest implements ColdThresholdSource{
+    public function getThreshold()
+    {
+        return 50;
+    }
+}
+
 class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThresholdSource
 {
     /**
@@ -106,13 +113,27 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
         );
     }
     /*
-     * Patron Shelf Shunt, usamos la propia clase test como test double
+     * Patron Self Shunt, usamos la propia clase test como test double
      * */
     public function getThreshold()
     {
         return 50;
     }
 
+    /**
+     * @test
+     */
+    public function tryToCheckIfAColdTemperatureIsSuperColdWithAnomClass()
+    {
+        $temperature = Temperature::take(2);
+        //$coldThreshold = new ColdThreshold();
+
+        $this->assertTrue(
+            $temperature->isSuperCold(
+                new ColdThresholdSourceTest()
+            )
+        );
+    }
 
     /**
      * @test
