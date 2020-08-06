@@ -4,12 +4,13 @@
 namespace PH\Tests;
 
 use PH\ColdThreshold;
+use PH\ColdThresholdSource;
 use PH\Temperature;
 use PH\TemperatureNegativeException;
 use PH\TemperatureTestClass;
 use PHPUnit_Framework_TestCase;
 
-class TemperatureTest extends PHPUnit_Framework_TestCase
+class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThresholdSource
 {
     /**
      * @test
@@ -100,9 +101,16 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(
             $temperature->isSuperCold(
-                $coldThreshold
+                $this
             )
         );
+    }
+    /*
+     * Patron Shelf Shunt, usamos la propia clase test como test double
+     * */
+    public function getThreshold()
+    {
+        return 50;
     }
 
 
