@@ -37,7 +37,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
     {
         $this->expectException(TemperatureNegativeException::class);
 
-        new Temperature(-1);
+        Temperature::take(-1);
     }
 
     /**
@@ -48,7 +48,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
         $measure = 18;
         $this->assertSame(
             $measure,
-            (new Temperature($measure))->measure()
+            Temperature::take($measure)->measure()
         );
     }
 
@@ -57,7 +57,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function tryToCheckIfAColdTemperatureIsSuperHot()
     {
-        $temperature = new Temperature(105);
+        $temperature = Temperature::take(105);
         $this->assertTrue(
             $temperature->isSuperHot()
         );
@@ -68,7 +68,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function tryToCheckIfAColdTemperatureNotIsSuperHot()
     {
-        $temperature = new Temperature(50);
+        $temperature = Temperature::take(50);
         $this->assertFalse(
             $temperature->isSuperHot()
         );
@@ -79,7 +79,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function tryToCheckIfAColdTemperatureNotIsSuperCold()
     {
-        $temperature = new Temperature(10);
+        $temperature = Temperature::take(10);
         $coldThreshold = new ColdThreshold();
 
         $this->assertFalse(
@@ -94,7 +94,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function tryToCheckIfAColdTemperatureIsSuperCold()
     {
-        $temperature = new Temperature(2);
+        $temperature = Temperature::take(2);
         $coldThreshold = new ColdThreshold();
 
         $this->assertTrue(
@@ -119,8 +119,8 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function tryToSumTwoMeasures()
     {
-        $a = new Temperature(50);
-        $b = new Temperature(50);
+        $a = Temperature::take(50);
+        $b = Temperature::take(50);
 
         $a->add($b);
 
