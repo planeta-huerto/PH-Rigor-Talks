@@ -75,9 +75,9 @@ Si todavía hay problemas, puedes eliminar contenedor e imagen:
 
 Tareas:
 
-- [ ] Poner en marcha el contenedor
-- [ ] Probar los test
-- [ ] Probar la covertura 
+- [x] Poner en marcha el contenedor
+- [x] Probar los test
+- [x] Probar la covertura 
 
 ### BASE DE DATOS
 Existe una base de datos SQLite llamada “configure” con dos tablas. 
@@ -95,7 +95,7 @@ Como somos benevolentes hemos contratado un formador online especialmente para q
 
 Sigue los vídeos de Carlos Buenosvinos:
 
-- [ ] [#1 - Guard Clauses](https://youtu.be/Ttk9fDGwjrY)
+- [x] [#1 - Guard Clauses](https://youtu.be/Ttk9fDGwjrY)
 - [ ] [#2 - Self-Encapsulation (Spanish)](https://youtu.be/4PVUiMOVl5w)
 - [ ] [#3 - Named Constructors I](https://youtu.be/LjEG7AR-MOg)
 - [ ] [#4 - Named Constructors II](https://youtu.be/RE3cAEFSsDc)
