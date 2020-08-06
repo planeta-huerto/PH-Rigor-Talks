@@ -4,6 +4,9 @@
 build:
 	docker-compose up
 
+build-fg:
+	docker-compose up -d
+
 install-composer:
 	docker-compose exec webserver composer install
 
