@@ -39,10 +39,11 @@ class Temperature
     }
 
     /**
-     * Named Constructor
+     * Named Constructor, permite codigo mucho mas alineado  con nuestro lenguaje de negocio
      */
     public static function take($measure){
-        return new Temperature($measure);
+        return new self($measure);
+        // return new static($measure);
     }
 
     public function measure()
