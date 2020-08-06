@@ -17,7 +17,11 @@ class Temperature
 
     private function setMeasure($measure)
     {
-
+        /**
+         * Self-Encapsulation permite coger nuestros setters (asignaciones de variables internas)
+         * y moverlos a setters internos privados de forma que podamos centralizar todo lo que
+         * tenga que ver con esos campos.
+         */
         $this->checkMeasureIsPositive($measure); // Guard Clauses: metodos que comprueban las excepciones antes de hacer
         // algun tipo de asignacion
         $this->measure = $measure;
@@ -34,6 +38,12 @@ class Temperature
         }
     }
 
+    /**
+     * Named Constructor
+     */
+    public static function take($measure){
+        return new Temperature($measure);
+    }
 
     public function measure()
     {

@@ -21,6 +21,18 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function tryToCreateAValidTemperatureWithNameConstructor()
+    {
+        $measure = 18;
+        $this->assertSame(
+            $measure,
+            Temperature::take($measure)->measure()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function tryToCreateANonValidTemperature()
     {
         $this->expectException(TemperatureNegativeException::class);
