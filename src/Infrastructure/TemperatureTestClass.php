@@ -1,8 +1,9 @@
 <?php
 
 
-namespace PH;
+namespace PH\Infrastructure;
 
+use PH\Domain\Temperature;
 
 use SQLite3;
 

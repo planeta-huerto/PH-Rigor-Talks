@@ -1,7 +1,7 @@
 <?php
 
 
-namespace PH;
+namespace PH\Domain;
 
 
 use Exception;

@@ -3,23 +3,24 @@
 
 namespace PH\Tests;
 
-use PH\ColdThreshold;
-use PH\ColdThresholdSource;
-use PH\Temperature;
-use PH\TemperatureNegativeException;
-use PH\TemperatureTestClass;
+use PH\Domain\ThresholdSourceInterface;
+use PH\Domain\Temperature;
+use PH\Domain\TemperatureNegativeException;
+use PH\Infrastructure\TemperatureTestClass;
+use PH\Infrastructure\InMemoryThreshold;
 use PHPUnit_Framework_TestCase;
 
-final class ColdThresholdSourceTest implements ColdThresholdSource
+// Implementacion de la clase anonima
+final class ThresholdSourceInterfaceTest implements ThresholdSourceInterface
 {
 
-    public function getThreshold()
+    public function getThreshold($string)
     {
         return 50;
     }
 }
 
-class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThresholdSource
+class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSourceInterface
 {
     /**
      * @test
@@ -69,8 +70,10 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
     public function tryToCheckIfAColdTemperatureIsSuperHot()
     {
         $temperature = TemperatureTestClass::take(105);
+        $memoryThreshold = new InMemoryThreshold();
+        //$hotThreshold = new HotThreshold();
         $this->assertTrue(
-            $temperature->isSuperHot()
+            $temperature->isSuperHot($memoryThreshold)
         );
     }
 
@@ -79,9 +82,11 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
      */
     public function tryToCheckIfAColdTemperatureNotIsSuperHot()
     {
-        $temperature = TemperatureTestClass::take(50);
+        $temperature = TemperatureTestClass::take(9);
+        //$hotThreshold = new HotThreshold();
+        $memoryThreshold = new InMemoryThreshold();
         $this->assertFalse(
-            $temperature->isSuperHot()
+            $temperature->isSuperHot($memoryThreshold)
         );
     }
 
@@ -90,8 +95,8 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
      */
     public function tryToCheckIfAColdTemperatureNotIsSuperCold()
     {
-        $temperature = Temperature::take(10);
-        $coldThreshold = new ColdThreshold();
+        $temperature = Temperature::take(17);
+        $coldThreshold = new InMemoryThreshold();
 
         $this->assertFalse(
             $temperature->isSuperCold(
@@ -106,7 +111,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
     public function tryToCheckIfAColdTemperatureIsSuperCold()
     {
         $temperature = Temperature::take(2);
-        $coldThreshold = new ColdThreshold();
+        $coldThreshold = new InMemoryThreshold();
 
         $this->assertTrue(
             $temperature->isSuperCold(
@@ -117,7 +122,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
     /*
      * Patron Self Shunt, usamos la propia clase test como test double
      * */
-    public function getThreshold()
+    public function getThreshold($string)
     {
         return 50;
     }
@@ -128,11 +133,11 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
     public function tryToCheckIfAColdTemperatureIsSuperColdWithAnomClass()
     {
         $temperature = Temperature::take(2);
-        //$coldThreshold = new ColdThreshold();
+        //$coldThreshold = new ColdOrHotThreshold();
 
         $this->assertTrue(
             $temperature->isSuperCold(
-                new ColdThresholdSourceTest()
+                new ThresholdSourceInterfaceTest()
             )
         );
     }

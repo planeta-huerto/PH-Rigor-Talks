@@ -1,7 +1,7 @@
 <?php
 
 
-namespace PH;
+namespace PH\Domain;
 
 
 use SQLite3;
@@ -51,17 +51,17 @@ class Temperature
         return $this->measure;
     }
 
-    public function isSuperHot()
+    public function isSuperHot(ThresholdSourceInterface $hotThresholdSource)
     {
-        $threshold = $this->getThreshold();
+        $threshold = $hotThresholdSource->getThreshold("");
 
         return $this->measure() > $threshold;
-
+        //return false;
     }
 
-    public function isSuperCold(ColdThresholdSource $coldThresholdSource)
+    public function isSuperCold(ThresholdSourceInterface $coldThresholdSource)
     {
-        $threshold = $coldThresholdSource->getThreshold();
+        $threshold = $coldThresholdSource->getThreshold("");
         return $this->measure() < $threshold;
 
     }
@@ -83,16 +83,6 @@ class Temperature
         );
     }
 
-    /**
-     * @return mixed
-     */
-    protected function getThreshold() // Este metodo tiene la insfraestructura
-    {
-        $bd        = new SQLite3('tests/db/temperature.db');
-        $threshold = $bd->querySingle('SELECT hot_threshold FROM configure');
-
-        return $threshold;
-    }
 
 
 }
