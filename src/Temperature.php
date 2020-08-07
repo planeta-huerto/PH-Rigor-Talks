@@ -78,8 +78,9 @@ class Temperature
 
     public function add($temperatureForAdd)
     {
-        $sum = $this->measure + $temperatureForAdd->measure;
-        $this->setMeasure($sum);
+        return new self(
+            $this->measure() + $temperatureForAdd->measure()
+        );
     }
 
     /**

@@ -142,7 +142,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
      */
     public function tryToCreateATemperatureFromStation()
     {
-        $this->markTestSkipped();
+        //$this->markTestSkipped();
 
         $this->assertSame(
             50,
@@ -172,10 +172,13 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
         $a = Temperature::take(50);
         $b = Temperature::take(50);
 
-        $a->add($b);
+        $c = $a->add($b); // Inmutabilidad: Asegurarnos de que nuestras operaciones devuelven
+                        // una nueva instancia
 
         echo "ESto" . $a->measure();
-        $this->assertSame(100, $a->measure());
+        $this->assertSame(100, $c->measure());
+        $this->assertNotSame($c, $a);
+        $this->assertNotSame($c, $b);
 
     }
 
