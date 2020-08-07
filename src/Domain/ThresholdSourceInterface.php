@@ -6,5 +6,5 @@ namespace PH\Domain;
 
 interface ThresholdSourceInterface
 {
-    public function getThreshold($string);
+    public function getThreshold($thresholdType);
 }

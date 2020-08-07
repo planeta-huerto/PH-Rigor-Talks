@@ -11,10 +11,16 @@ final class SQLThreshold implements ThresholdSourceInterface
      *      'SELECT hot_threshold FROM configure'
      *      'SELECT cold_threshold FROM configure'
      */
-    public function getThreshold($consult) // Este metodo tiene la insfraestructura
+
+    public function getThreshold($thresholdType) // Este metodo tiene la insfraestructura
     {
         $bd        = new SQLite3('tests/db/temperature.db');
-        $threshold = $bd->querySingle($consult);
+        if($thresholdType === 'hot'){
+            $threshold = $bd->querySingle('SELECT hot_threshold FROM configure');
+        }
+        else{
+            $threshold = $bd->querySingle('SELECT cold_threshold FROM configure');
+        }
         return $threshold;
     }
 }

@@ -6,8 +6,8 @@ use PH\Domain\ThresholdSourceInterface;
 
 final class InMemoryThreshold implements ThresholdSourceInterface
 {
-    public function getThreshold($consult)
+    public function getThreshold($thresholdType)
     {
-        return 10;
+        return $thresholdType === 'hot' ? 50 : 5;
     }
 }
