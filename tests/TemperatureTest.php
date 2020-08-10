@@ -103,12 +103,8 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSou
     public function tryToCheckIfAColdTemperatureNotIsSuperCold()
     {
         $temperature = Temperature::take(17);
-        //$coldThreshold = new InMemoryThreshold();
-        //$typethrehold = $container['in_memory_threshold'];
-
         $this->assertFalse(
             $temperature->isSuperCold(
-                //$coldThreshold
                 $this->repository
             )
         );

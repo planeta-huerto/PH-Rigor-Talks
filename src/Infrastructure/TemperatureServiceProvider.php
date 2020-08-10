@@ -4,7 +4,7 @@ namespace PH\Infrastructure;
 
 use Pimple\Container;
 
-final class TemperaturaServiceProvider implements \Pimple\ServiceProviderInterface
+final class TemperatureServiceProvider implements \Pimple\ServiceProviderInterface
 {
 
     /**
@@ -15,5 +15,7 @@ final class TemperaturaServiceProvider implements \Pimple\ServiceProviderInterfa
         $pimple['in_memory_threshold'] = function (){
             return new InMemoryThreshold();
         };
+        // AQUI PUEDO DEFINIR LOS DOS DE LAS BASE DE DATOS
+
     }
 }

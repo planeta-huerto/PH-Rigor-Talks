@@ -22,6 +22,6 @@ final class ServiceContainer
     }
 
     public static function registerProviders(){
-        static::instance()->register(new TemperaturaServiceProvider());
+        static::instance()->register(new TemperatureServiceProvider());
     }
 }
