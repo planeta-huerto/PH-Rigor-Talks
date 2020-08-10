@@ -4,6 +4,7 @@
 namespace PH\Domain;
 
 
+use Pimple\Container;
 use SQLite3;
 
 class Temperature
@@ -54,7 +55,6 @@ class Temperature
     public function isSuperHot(ThresholdSourceInterface $hotThresholdSource)
     {
         $threshold = $hotThresholdSource->getThreshold("hot");
-
         return $this->measure() > $threshold;
         //return false;
     }

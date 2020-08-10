@@ -4,6 +4,7 @@ namespace PH\Infrastructure;
 
 use PH\Domain\ThresholdSourceInterface;
 use SQLite3;
+use Pimple\Container;
 final class SQLThreshold implements ThresholdSourceInterface
 {
     /*
@@ -22,5 +23,6 @@ final class SQLThreshold implements ThresholdSourceInterface
             $threshold = $bd->querySingle('SELECT cold_threshold FROM configure');
         }
         return $threshold;
+
     }
 }

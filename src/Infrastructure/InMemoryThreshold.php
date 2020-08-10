@@ -3,6 +3,7 @@
 namespace PH\Infrastructure;
 
 use PH\Domain\ThresholdSourceInterface;
+use Pimple\Container;
 
 final class InMemoryThreshold implements ThresholdSourceInterface
 {

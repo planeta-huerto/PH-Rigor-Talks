@@ -6,9 +6,11 @@ namespace PH\Tests;
 use PH\Domain\ThresholdSourceInterface;
 use PH\Domain\Temperature;
 use PH\Domain\TemperatureNegativeException;
+use PH\Infrastructure\ServiceContainer;
 use PH\Infrastructure\TemperatureTestClass;
 use PH\Infrastructure\InMemoryThreshold;
 use PHPUnit_Framework_TestCase;
+use Pimple\Container;
 
 // Implementacion de la clase anonima
 final class ThresholdSourceInterfaceTest implements ThresholdSourceInterface
@@ -22,6 +24,12 @@ final class ThresholdSourceInterfaceTest implements ThresholdSourceInterface
 
 class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSourceInterface
 {
+    private $repository;
+    protected function setUp()
+    {
+        $this->repository = ServiceContainer::instance()['in_memory_threshold'];
+    }
+
     /**
      * @test
      */
@@ -69,7 +77,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSou
      */
     public function tryToCheckIfAColdTemperatureIsSuperHot()
     {
-        $temperature = TemperatureTestClass::take(105);
+        $temperature = Temperature::take(105);
         $memoryThreshold = new InMemoryThreshold();
         //$hotThreshold = new HotThreshold();
         $this->assertTrue(
@@ -82,8 +90,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSou
      */
     public function tryToCheckIfAColdTemperatureNotIsSuperHot()
     {
-        $temperature = TemperatureTestClass::take(9);
-        //$hotThreshold = new HotThreshold();
+        $temperature = Temperature::take(9);
         $memoryThreshold = new InMemoryThreshold();
         $this->assertFalse(
             $temperature->isSuperHot($memoryThreshold)
@@ -96,11 +103,13 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSou
     public function tryToCheckIfAColdTemperatureNotIsSuperCold()
     {
         $temperature = Temperature::take(17);
-        $coldThreshold = new InMemoryThreshold();
+        //$coldThreshold = new InMemoryThreshold();
+        //$typethrehold = $container['in_memory_threshold'];
 
         $this->assertFalse(
             $temperature->isSuperCold(
-                $coldThreshold
+                //$coldThreshold
+                $this->repository
             )
         );
     }
