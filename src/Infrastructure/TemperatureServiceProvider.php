@@ -22,9 +22,10 @@ final class TemperatureServiceProvider implements \Pimple\ServiceProviderInterfa
         $pimple['hot'] = function (){
             $bd        = new SQLite3('tests/db/temperature.db');
             return $bd->querySingle('SELECT hot_threshold FROM configure');
+
         };
 
-        $pimple['cold'] = function (){
+        $pimple['cold'] = function ($bd){
             $bd        = new SQLite3('tests/db/temperature.db');
             return $bd->querySingle('SELECT cold_threshold FROM configure');
         };

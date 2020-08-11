@@ -7,6 +7,7 @@ use PH\Domain\ThresholdSourceInterface;
 use PH\Domain\Temperature;
 use PH\Domain\TemperatureNegativeException;
 use PH\Infrastructure\ServiceContainer;
+use PH\Infrastructure\SQLThreshold;
 use PH\Infrastructure\TemperatureTestClass;
 use PH\Infrastructure\InMemoryThreshold;
 use PHPUnit_Framework_TestCase;
@@ -38,6 +39,18 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSou
         $this->assertTrue(true);
     }
 
+    /**
+     * @test
+     */
+    public function tryToCheckIfSQLThresholdWithPimpleWorks(){
+        $temperature = Temperature::take(17);
+        $sql = new SQLThreshold();
+        $this->assertFalse(
+            $temperature->isSuperCold(
+                $sql
+            )
+        );
+    }
     /**
      * @test
      */

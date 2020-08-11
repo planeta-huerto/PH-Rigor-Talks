@@ -54,14 +54,14 @@ class Temperature
 
     public function isSuperHot(ThresholdSourceInterface $hotThresholdSource)
     {
-        $threshold = $hotThresholdSource->getThreshold("hot");
+        $threshold = $hotThresholdSource->getThreshold('hot');
         return $this->measure() > $threshold;
         //return false;
     }
 
     public function isSuperCold(ThresholdSourceInterface $coldThresholdSource)
     {
-        $threshold = $coldThresholdSource->getThreshold("cold");
+        $threshold = $coldThresholdSource->getThreshold('cold');
         return $this->measure() < $threshold;
 
     }
