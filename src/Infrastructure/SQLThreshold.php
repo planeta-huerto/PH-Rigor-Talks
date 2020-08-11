@@ -15,14 +15,6 @@ final class SQLThreshold implements ThresholdSourceInterface
 
     public function getThreshold($thresholdType) // Este metodo tiene la insfraestructura
     {
-        $bd        = new SQLite3('tests/db/temperature.db');
-        if($thresholdType === 'hot'){
-            $threshold = $bd->querySingle('SELECT hot_threshold FROM configure');
-        }
-        else{
-            $threshold = $bd->querySingle('SELECT cold_threshold FROM configure');
-        }
-        return $threshold;
-
+        ServiceContainer::instance()[$thresholdType];
     }
 }
