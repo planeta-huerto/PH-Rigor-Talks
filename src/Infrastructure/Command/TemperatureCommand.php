@@ -6,7 +6,6 @@ use PH\Infrastructure\ServiceContainer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use PH\Domain\Temperature;
 
@@ -22,10 +21,10 @@ class TemperatureCommand extends Command
 
         $this
             ->setName('app:temperature')
-            ->setDescription('It tells if the temperature is cold or hot.')
+            ->setDescription('It tells if the temperature is super cold or super hot.')
             ->addArgument(
                 'measure',
-                InputArgument::OPTIONAL,
+                InputArgument::REQUIRED,
                 'Tell the measure of the temperature'
             )
         ;
