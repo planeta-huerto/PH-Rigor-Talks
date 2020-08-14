@@ -7,3 +7,4 @@
 #project
 /.ssh/
 /.php_cs.cache
+.vendor
