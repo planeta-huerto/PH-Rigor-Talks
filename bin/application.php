@@ -7,7 +7,8 @@ require dirname(__DIR__).'/vendor/autoload.php';
 
 use PH\Infrastructure\Command\TemperatureCommand;
 use Symfony\Component\Console\Application;
-
+use PH\Infrastructure\Command\ApiAemetCommand;
 $application = new Application();
 $application->add(new TemperatureCommand());
+$application->add(new ApiAemetCommand());
 $application->run();
