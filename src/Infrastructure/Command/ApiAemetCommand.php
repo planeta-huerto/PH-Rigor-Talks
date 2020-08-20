@@ -2,6 +2,7 @@
 
 namespace PH\Infrastructure\Command;
 
+use PH\Domain\ProvinceNotFoundException;
 use PH\Domain\Temperature;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
