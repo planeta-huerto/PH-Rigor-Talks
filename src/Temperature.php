@@ -6,7 +6,7 @@ use SQLite3;
 
 class Temperature
 {
-    private $measure;
+    private int $measure;
 
     private function __construct($measure)
     {
@@ -30,45 +30,25 @@ class Temperature
         }
     }
 
-    public static function take($measure)
+    public static function take(int $measure): Temperature
     {
-        return new self($measure);
+        return new static($measure);
     }
 
-    public function measure()
+    public function measure(): int
     {
         return $this->measure;
     }
 
-    public function isSuperHot()
+    public function isSuperHot(): bool
+    {
+        $threshold = $this->getThreshold();
+        return $this->measure() > $threshold;
+    }
+
+    protected function getThreshold()
     {
         $bd = new SQLite3('tests/db/temperature.db');
-        $threshold = $bd->querySingle('SELECT hot_threshold FROM configure');
-
-        return $this->measure() > $threshold;
-
-    }
-
-    public function isSuperCold(ColdThresholdSource $coldThresholdSource)
-    {
-        $threshold = $coldThresholdSource->getThreshold();
-        return $this->measure() < $threshold;
-
-    }
-
-
-    public static function fromStation($station)
-    {
-        ##CUIDADO LEY DE DEMETER
-        return new static(
-            $station->sensor()->temperature()->measure()
-        );
-    }
-
-
-    public function add($temperatureForAdd)
-    {
-        $sum = $this->measure + $temperatureForAdd->measure;
-        $this->setMeasure($sum);
+        return $bd->querySingle('SELECT hot_threshold FROM configure');
     }
 }

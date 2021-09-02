@@ -1,11 +1,10 @@
 <?php
 
-
 namespace PH\Tests;
 
-use PH\ColdThreshold;
 use PH\Temperature;
 use PH\TemperatureNegativeException;
+use PH\TemperatureTestClass;
 use PHPUnit_Framework_TestCase;
 
 class TemperatureTest extends PHPUnit_Framework_TestCase
@@ -28,6 +27,26 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             $measure,
             (Temperature::take($measure)->measure())
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function tryToCheckIfAColdTemperatureIsSuperHot()
+    {
+        $this->assertFalse(
+            TemperatureTestClass::take(10)->isSuperHot()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function tryToCheckIfASuperHotTemperatureIsSuperHot()
+    {
+        $this->assertTrue(
+            TemperatureTestClass::take(100)->isSuperHot()
         );
     }
 }
