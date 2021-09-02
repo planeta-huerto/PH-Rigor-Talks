@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PH;
-
 
 use SQLite3;
 
@@ -10,21 +8,31 @@ class Temperature
 {
     private $measure;
 
-    public function __construct($measure)
+    private function __construct($measure)
     {
-        if ($measure >= 0) {
-            $this->measure = $measure;
-
-        } else {
-            throw new TemperatureNegativeException("Measure should be positive");
-        }
-
+        $this->setMeasure($measure);
     }
 
-    public function setMeasure($measure)
+    private function setMeasure($measure)
     {
-
+        $this->checkMeasureIsPositive($measure);
         $this->measure = $measure;
+    }
+
+    /**
+     * @param $measure
+     * @throws TemperatureNegativeException
+     */
+    public function checkMeasureIsPositive($measure)
+    {
+        if ($measure < 0) {
+            throw TemperatureNegativeException::fromMeasure($measure);
+        }
+    }
+
+    public static function take($measure)
+    {
+        return new self($measure);
     }
 
     public function measure()
@@ -63,5 +71,4 @@ class Temperature
         $sum = $this->measure + $temperatureForAdd->measure;
         $this->setMeasure($sum);
     }
-
 }

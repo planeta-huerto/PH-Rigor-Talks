@@ -13,8 +13,8 @@ Cuando lo tengas realizado, puedes marcarlos en el README de este modo.
 ### DESCARGA EL REPOSITORIO
 
 Tareas:
-- [ ] Clona el repositorio [Repositorio en GitHub](https://github.com/planetahuerto/rigortalks)
-- [ ] Crea una rama con tu nombre. (Ejemplo “marcos-ph”)
+- [x] Clona el repositorio [Repositorio en GitHub](https://github.com/planetahuerto/rigortalks)
+- [x] Crea una rama con tu nombre. (Ejemplo “marcos-ph”)
 
 ### ORGANIZACIÓN DEL CÓDIGO
 Ahora que ya tienes el proyecto en tu mano, dentro de “src” está la lógica del desarrollar y 
@@ -75,9 +75,9 @@ Si todavía hay problemas, puedes eliminar contenedor e imagen:
 
 Tareas:
 
-- [ ] Poner en marcha el contenedor
-- [ ] Probar los test
-- [ ] Probar la cobertura 
+- [x] Poner en marcha el contenedor
+- [x] Probar los test
+- [x] Probar la cobertura 
 
 ### BASE DE DATOS
 Existe una base de datos SQLite llamada “configure” con dos tablas. 
@@ -95,12 +95,12 @@ Como somos benevolentes hemos contratado un formador online especialmente para q
 
 Sigue los vídeos de Carlos Buenosvinos:
 
-- [ ] [#1 - Guard Clauses](https://youtu.be/Ttk9fDGwjrY)
-- [ ] [#2 - Self-Encapsulation (Spanish)](https://youtu.be/4PVUiMOVl5w)
-- [ ] [#3 - Named Constructors I](https://youtu.be/LjEG7AR-MOg)
-- [ ] [#4 - Named Constructors II](https://youtu.be/RE3cAEFSsDc)
-- [ ] [#5 - Named Constructors III](https://youtu.be/w2CfVDtQGc0)
-- [ ] [#6 - Named Constructors IV ](https://youtu.be/210Ed5PeK4g)
+- [x] [#1 - Guard Clauses](https://youtu.be/Ttk9fDGwjrY)
+- [x] [#2 - Self-Encapsulation (Spanish)](https://youtu.be/4PVUiMOVl5w)
+- [x] [#3 - Named Constructors I](https://youtu.be/LjEG7AR-MOg)
+- [x] [#4 - Named Constructors II](https://youtu.be/RE3cAEFSsDc)
+- [x] [#5 - Named Constructors III](https://youtu.be/w2CfVDtQGc0)
+- [x] [#6 - Named Constructors IV ](https://youtu.be/210Ed5PeK4g)
 - [ ] [#7 - Test Class](https://youtu.be/8UFAyC173JU)
 - [ ] [#8 - Self-Shunt ](https://youtu.be/Ds-Iop1zB24)
 - [ ] [#9 - Self-Shunt II (PHP7)](https://youtu.be/gpUDgEVw9tM)
