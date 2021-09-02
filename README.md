@@ -1,12 +1,12 @@
 # PROYECTO DE TEMPERATURA
-Bienvenido al gestionador de temperatura de Planeto Huerto. 
-Para poder controlar correctamente el crecimiento de nuestros de los Bonsais, hemos creado una aplicación que nos ayude reconocer que temperaturas son  muy calientes o muy frías para nuestros bonsais. Por esta razón tenemos que controlar el parámetro de temperatura. 
+Bienvenido al gestionador de temperatura de Planeta Huerto. 
+Para poder controlar correctamente el crecimiento de nuestros de los Bonsais, hemos creado una aplicación que nos ayude reconocer que temperaturas son muy calientes o muy frías para nuestros bonsais. Por esta razón tenemos que controlar el parámetro de temperatura. 
 
 
 ## PUESTA EN MARCHA
 A lo largo de esta documentación hay puntos que tienes que realizar
 
-Cuando lo tengas realizado, puedes marcar los en el README de este modo.
+Cuando lo tengas realizado, puedes marcarlos en el README de este modo.
 [x] Visto
 
 
@@ -40,7 +40,7 @@ Ficheros de configuración del proyecto
 
 ## COMANDOS DOCKER EN EL FICHERO “Makefile”
 
-Para crear y arrancar el contenedor con la información que se refleja en los ficheros de configuración “docker-compose.yml” y “Dockerfile”. Este comando solo es necesario la utilizarlo para crear el contenedor. Utiliza el comando:
+Para crear y arrancar el contenedor con la información que se refleja en los ficheros de configuración “docker-compose.yml” y “Dockerfile”. Este comando solo es necesario utilizarlo para crear el contenedor. Utiliza el comando:
 
     $ make build
 
@@ -57,7 +57,7 @@ Para ejecutar los test:
 
     $ make test
 
-Para conocer la covertura de los test:
+Para conocer la cobertura de los test:
 
 	$ make coverage
 
@@ -77,7 +77,7 @@ Tareas:
 
 - [ ] Poner en marcha el contenedor
 - [ ] Probar los test
-- [ ] Probar la covertura 
+- [ ] Probar la cobertura 
 
 ### BASE DE DATOS
 Existe una base de datos SQLite llamada “configure” con dos tablas. 
