@@ -2,7 +2,7 @@
 
 ##CREAR CONTENEDOR E INSTALAR LIBRERÍAS
 build:
-	docker-compose up
+	docker-compose up -d
 
 install-composer:
 	docker-compose exec webserver composer install
