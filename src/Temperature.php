@@ -20,10 +20,10 @@ class Temperature
     }
 
     /**
-     * @param $measure
+     * @param int $measure
      * @throws TemperatureNegativeException
      */
-    public function checkMeasureIsPositive($measure)
+    public function checkMeasureIsPositive(int $measure)
     {
         if ($measure < 0) {
             throw TemperatureNegativeException::fromMeasure($measure);
@@ -46,9 +46,31 @@ class Temperature
         return $this->measure() > $threshold;
     }
 
+    public function isSuperCold(ColdThresholdSource $coldThresholdSource)
+    {
+        $theshhold = $coldThresholdSource->getThreshold();
+
+        return $this->measure() < $theshhold;
+    }
+
     protected function getThreshold()
     {
         $bd = new SQLite3('tests/db/temperature.db');
         return $bd->querySingle('SELECT hot_threshold FROM configure');
+    }
+
+    public static function fromStation($station)
+    {
+        //CUIDADO LEY DE DEMETER
+        return new static(
+            $station->sensor()->temperature()->measure()
+        );
+    }
+
+    public function add(self $temperatureForAdd): self
+    {
+        return new self(
+            $this->measure() + $temperatureForAdd->measure()
+        );
     }
 }
