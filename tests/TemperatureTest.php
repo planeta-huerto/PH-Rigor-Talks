@@ -4,10 +4,9 @@ namespace PH\Tests;
 
 use PH\Domain\Temperature;
 use PH\Domain\TemperatureNegativeException;
-use PH\Domain\ThresholdSource;
 use PHPUnit_Framework_TestCase;
 
-class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSource
+class TemperatureTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -28,89 +27,6 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSou
             $measure,
             (Temperature::take($measure)->measure())
         );
-    }
-
-    /**
-     * @test
-     */
-    public function tryToCheckIfAColdTemperatureIsSuperHot()
-    {
-        $this->assertFalse(
-            TemperatureTestClass::take(10)->isSuperHot()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function tryToCheckIfASuperHotTemperatureIsSuperHot()
-    {
-        $this->assertTrue(
-            TemperatureTestClass::take(100)->isSuperHot()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function tryToCheckIfASuperColdTemperatureIsSuperCold()
-    {
-        $this->assertTrue(
-            Temperature::take(10)->isSuperCold(
-                $this
-            )
-        );
-    }
-
-    public function getThreshold(): int
-    {
-        return 50;
-    }
-
-    /**
-     * @test
-     */
-    public function tryToCheckIfASuperColdTemperatureIsSuperColdWithAnonClass()
-    {
-        $this->assertTrue(
-            Temperature::take(10)->isSuperCold(
-                new class implements ThresholdSource
-                {
-                    public function getThreshold(): int
-                    {
-                        return 50;
-                    }
-                }
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function tryToCreateATemperatureFromStation()
-    {
-        $this->assertSame(
-            50,
-            Temperature::fromStation(
-                $this
-            )->measure()
-        );
-    }
-
-    public function sensor()
-    {
-        return $this;
-    }
-
-    public function temperature()
-    {
-        return $this;
-    }
-
-    public function measure()
-    {
-        return 50;
     }
 
     /**
