@@ -2,13 +2,12 @@
 
 namespace PH\Tests;
 
-use PH\ColdThresholdSource;
-use PH\Temperature;
-use PH\TemperatureNegativeException;
-use PH\TemperatureTestClass;
+use PH\Domain\Temperature;
+use PH\Domain\TemperatureNegativeException;
+use PH\Domain\ThresholdSource;
 use PHPUnit_Framework_TestCase;
 
-class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThresholdSource
+class TemperatureTest extends PHPUnit_Framework_TestCase implements ThresholdSource
 {
     /**
      * @test
@@ -75,7 +74,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
     {
         $this->assertTrue(
             Temperature::take(10)->isSuperCold(
-                new class implements ColdThresholdSource
+                new class implements ThresholdSource
                 {
                     public function getThreshold(): int
                     {

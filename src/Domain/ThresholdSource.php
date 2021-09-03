@@ -1,10 +1,8 @@
 <?php
 
+namespace PH\Domain;
 
-namespace PH;
-
-
-interface ColdThresholdSource
+interface ThresholdSource
 {
     public function getThreshold();
 }

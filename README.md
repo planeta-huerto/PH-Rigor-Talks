@@ -110,9 +110,9 @@ Sigue los vídeos de Carlos Buenosvinos:
 
 ### IMPLEMENTACIÓN DE MEJORAS
 Tareas:
-- [ ] Intentar separar los conceptos de Dominio, Aplicación e Infraestructura. Según la arquitectura hexagonal.
-- [ ] Aplica Clean Code
-- [ ] Aplica principios SOLID
+- [x] Intentar separar los conceptos de Dominio, Aplicación e Infraestructura. Según la arquitectura hexagonal.
+- [x] Aplica Clean Code
+- [x] Aplica principios SOLID
 - [ ] Utiliza servicios con Pimple.
 - [ ] Utiliza el Api de Aemet para obtener la temperatura del día actual. 
     - [API Aemet ](https://opendata.aemet.es/centrodedescargas/inicio)
