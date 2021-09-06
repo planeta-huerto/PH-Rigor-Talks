@@ -114,7 +114,7 @@ Tareas:
 - [x] Aplica Clean Code
 - [x] Aplica principios SOLID
 - [ ] Utiliza servicios con Pimple.
-- [ ] Utiliza el Api de Aemet para obtener la temperatura del día actual. 
+- [x] Utiliza el Api de Aemet para obtener la temperatura del día actual. 
     - [API Aemet ](https://opendata.aemet.es/centrodedescargas/inicio)
 - [ ] Crea comandos de Symfony para saber si dada una temperatura es muy caliente o muy helada.
 

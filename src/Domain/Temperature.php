@@ -4,7 +4,7 @@ namespace PH\Domain;
 
 class Temperature
 {
-    private int $measure;
+    private float $measure;
 
     private function __construct($measure)
     {
@@ -17,12 +17,12 @@ class Temperature
         $this->measure = $measure;
     }
 
-    public static function take(int $measure): Temperature
+    public static function take(float $measure): Temperature
     {
         return new static($measure);
     }
 
-    public function measure(): int
+    public function measure(): float
     {
         return $this->measure;
     }
@@ -35,10 +35,10 @@ class Temperature
     }
 
     /**
-     * @param int $measure
+     * @param float $measure
      * @throws TemperatureNegativeException
      */
-    public function checkMeasureIsPositive(int $measure)
+    public function checkMeasureIsPositive(float $measure)
     {
         if ($measure < 0) {
             throw TemperatureNegativeException::fromMeasure($measure);

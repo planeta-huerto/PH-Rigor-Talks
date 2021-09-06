@@ -4,13 +4,14 @@ declare(strict_types=1);
 namespace PH\Application;
 
 use PH\Domain\Temperature;
+use PH\Domain\ThresholdSource;
 
 final class IsSuperCold
 {
     private Temperature $temperature;
-    private $threshold;
+    private ThresholdSource $threshold;
 
-    public function __construct(Temperature $temperature, $threshold)
+    public function __construct(Temperature $temperature, ThresholdSource $threshold)
     {
         $this->temperature = $temperature;
         $this->threshold = $threshold;
