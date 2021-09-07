@@ -44,12 +44,4 @@ class Temperature
             throw TemperatureNegativeException::fromMeasure($measure);
         }
     }
-
-    public static function fromStation($station)
-    {
-        //CUIDADO LEY DE DEMETER
-        return new static(
-            $station->sensor()->temperature()->measure()
-        );
-    }
 }
