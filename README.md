@@ -113,10 +113,10 @@ Tareas:
 - [x] Intentar separar los conceptos de Dominio, Aplicación e Infraestructura. Según la arquitectura hexagonal.
 - [x] Aplica Clean Code
 - [x] Aplica principios SOLID
-- [ ] Utiliza servicios con Pimple.
+- [x] Utiliza servicios con Pimple.
 - [x] Utiliza el Api de Aemet para obtener la temperatura del día actual. 
     - [API Aemet ](https://opendata.aemet.es/centrodedescargas/inicio)
-- [ ] Crea comandos de Symfony para saber si dada una temperatura es muy caliente o muy helada.
+- [x] Crea comandos de Symfony para saber si dada una temperatura es muy caliente o muy helada.
 
 
 Se pueden utilizar las librerías que se consideren en la rama de desarrollo.

@@ -26,7 +26,6 @@ final class SuperHotCommand extends Command
         $this
             // configure an argument
             ->addArgument('temperature', InputArgument::REQUIRED, 'Temperatura introducida.')
-            // ...
         ;
     }
 

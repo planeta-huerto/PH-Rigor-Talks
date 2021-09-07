@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace PH\Infrastructure;
 
-final class TemperatureAEMET
+use PH\Domain\TemperatureSourceInterface;
+
+final class TemperatureAEMET implements TemperatureSourceInterface
 {
     public function __construct()
     {
@@ -14,7 +16,7 @@ final class TemperatureAEMET
         $url = $this->getUrlIdEma("8025");
 
         $curl = curl_init();
-        $this->setCurltOpt($curl, $url);
+        $this->setCurlOpt($curl, $url);
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
@@ -35,7 +37,7 @@ final class TemperatureAEMET
         $fullCurlURL = "$url/?api_key=$key";
 
         $curl = curl_init();
-        $this->setCurltOpt($curl, $fullCurlURL);
+        $this->setCurlOpt($curl, $fullCurlURL);
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
@@ -50,7 +52,7 @@ final class TemperatureAEMET
         return $result->datos;
     }
 
-    private function setCurltOpt($curl, $url){
+    private function setCurlOpt($curl, $url){
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,

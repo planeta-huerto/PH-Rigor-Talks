@@ -24,7 +24,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
     {
         $measure = 18;
         $this->assertSame(
-            $measure,
+            FloatVal($measure),
             (Temperature::take($measure)->measure())
         );
     }
@@ -39,7 +39,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
 
         $c = $a->add($b);
 
-        $this->assertSame(100, $c->measure());
+        $this->assertSame(FloatVal(100), $c->measure());
         $this->assertNotSame($c, $a);
         $this->assertNotSame($c, $b);
     }
