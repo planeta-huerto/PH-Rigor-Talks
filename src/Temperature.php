@@ -3,53 +3,78 @@
 
 namespace PH;
 
-
+use phpDocumentor\Reflection\Types\Boolean;
 use SQLite3;
 
 class Temperature
 {
     private $measure;
 
-    public function __construct($measure)
+    /**
+     * Private constructor
+     */
+    private function __construct($measure)
     {
-        if ($measure >= 0) {
-            $this->measure = $measure;
-
-        } else {
-            throw new TemperatureNegativeException("Measure should be positive");
-        }
-
+        $this->setMeasure($measure);
     }
 
-    public function setMeasure($measure)
+    private function setMeasure($measure)
     {
-
+        $this->checkMeasureIsPositive($measure);
         $this->measure = $measure;
     }
 
-    public function measure()
+    /**
+     * Guard clause
+     *
+     * @param int $measure
+     * @throws TemperatureNegativeException
+     */
+    private function checkMeasureIsPositive($measure)
+    {
+        if ($measure < 0) {
+            throw TemperatureNegativeException::fromMeasure($measure);
+        }
+    }
+
+    /**
+     * Named constructor
+     * @param $measure
+     * @return static
+     */
+    public static function take($measure): self
+    {
+        return new static($measure);
+    }
+
+    public function measure(): int
     {
         return $this->measure;
     }
 
-    public function isSuperHot()
+    public function isSuperHot(): bool
     {
-        $bd = new SQLite3('tests/db/temperature.db');
-        $threshold = $bd->querySingle('SELECT hot_threshold FROM configure');
+        $threshold = $this->getThreshold();
 
         return $this->measure() > $threshold;
 
     }
 
-    public function isSuperCold(ColdThresholdSource $coldThresholdSource)
+    protected function getThreshold(): int
+    {
+        $bd = new SQLite3('tests/db/temperature.db');
+        return $bd->querySingle('SELECT hot_threshold FROM configure');
+    }
+
+    public function isSuperCold(ColdThresholdSource $coldThresholdSource): bool
     {
         $threshold = $coldThresholdSource->getThreshold();
+
         return $this->measure() < $threshold;
 
     }
 
-
-    public static function fromStation($station)
+    public static function fromStation($station): self
     {
         ##CUIDADO LEY DE DEMETER
         return new static(
@@ -57,11 +82,8 @@ class Temperature
         );
     }
 
-
-    public function add($temperatureForAdd)
+    public function add(self $anotherTemperature): self
     {
-        $sum = $this->measure + $temperatureForAdd->measure;
-        $this->setMeasure($sum);
+        return new self($this->measure() + $anotherTemperature->measure);
     }
-
 }

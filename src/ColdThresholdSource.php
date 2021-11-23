@@ -4,7 +4,9 @@
 namespace PH;
 
 
+use phpDocumentor\Reflection\Types\Boolean;
+
 interface ColdThresholdSource
 {
-    public function getThreshold();
+    public function getThreshold(): int;
 }
