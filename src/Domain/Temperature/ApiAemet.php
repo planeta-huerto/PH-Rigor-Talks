@@ -5,7 +5,7 @@ namespace PH\Domain\Temperature;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 
-class ApiAemet
+final class ApiAemet
 {
     // It would be great to set this variable in a .env file
     const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcnRlZ2FvcnRlZ2FkYW5pQGdtYWlsLmNvbSIsImp0aSI6IjA0NDViYzczLTU3MWQtNGRjOC05ZjkyLTFiMDY2NTI1OTcyZSIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjM4MTc1OTI5LCJ1c2VySWQiOiIwNDQ1YmM3My01NzFkLTRkYzgtOWY5Mi0xYjA2NjUyNTk3MmUiLCJyb2xlIjoiIn0._tpniBQYhELxw48lfaApO_wvk-E4xerhfQYgbMXNDe0';

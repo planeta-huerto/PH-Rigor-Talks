@@ -11,8 +11,3 @@ $application->add(new \PH\Application\Command\CheckTemperatureCommand());
 $application->add(new \PH\Application\Command\ClimatologicalValuesCommand());
 
 $application->run();
-
-use Symfony\Component\Dotenv\Dotenv;
-
-$dotenv = new Dotenv();
-$dotenv->load(__DIR__.'/.env');
