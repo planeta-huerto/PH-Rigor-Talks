@@ -1,17 +1,23 @@
 <?php
 
-
 namespace PH\Tests;
 
-use PH\ColdThreshold;
-use PH\ColdThresholdSource;
-use PH\Temperature;
-use PH\TemperatureNegativeException;
-use PH\TemperatureTestClass;
 use PHPUnit_Framework_TestCase;
+use PH\Domain\Temperature\Temperature;
+use PH\Infrastructure\Services\ServicesContainer;
+use PH\Domain\Temperature\TemperatureNegativeException;
+use PH\Infrastructure\Repository\ColdThresholdRepository;
 
-class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThresholdSource
+class TemperatureTest extends PHPUnit_Framework_TestCase
 {
+    protected $servicesContainer;
+
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->servicesContainer = ServicesContainer::getInstance();
+    }
+
     /**
      * @test
      */
@@ -28,7 +34,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
         $measure = 18;
         $this->assertSame(
             $measure,
-            Temperature::take($measure)->measure()
+            Temperature::take($measure)->getMeasure()
         );
     }
 
@@ -47,10 +53,10 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
      */
     public function tryToCreateAValidTemperature()
     {
-        $measure = 18;
+        $measure = 15;
         $this->assertSame(
             $measure,
-            Temperature::take($measure)->measure()
+            Temperature::take($measure)->getMeasure()
         );
     }
 
@@ -59,8 +65,10 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
      */
     public function tryToCheckIfASuperColdTemperatureIsSuperHot()
     {
+        $hotThresholdRepository = $this->servicesContainer->get('hot.repository');
+
         $this->assertFalse(
-            TemperatureTestClass::take(4)->isSuperHot()
+            $hotThresholdRepository->isSuperHot(Temperature::take(4))
         );
     }
 
@@ -69,8 +77,10 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
      */
     public function tryToCheckIfASuperHotTemperatureIsSuperHot()
     {
+        $hotThresholdRepository = $this->servicesContainer->get('hot.repository');
+
         $this->assertTrue(
-            TemperatureTestClass::take(105)->isSuperHot()
+            $hotThresholdRepository->isSuperHot(Temperature::take(105))
         );
     }
 
@@ -79,10 +89,10 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
      */
     public function tryToCheckIfASuperColdTemperatureIsSuperCold()
     {
+        $coldThresholdRepository = $this->servicesContainer->get('cold.repository');
+
         $this->assertTrue(
-            Temperature::take(4)->isSuperCold(
-                $this
-            )
+            $coldThresholdRepository->isSuperCold(Temperature::take(4))
         );
     }
 
@@ -91,64 +101,11 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
      */
     public function tryToCheckIfASuperHotTemperatureIsSuperCold()
     {
+        $coldThresholdRepository = $this->servicesContainer->get('cold.repository');
+
         $this->assertFalse(
-            Temperature::take(105)->isSuperCold(
-                $this
-            )
+            $coldThresholdRepository->isSuperCold(Temperature::take(105))
         );
-    }
-
-    public function getThreshold(): int
-    {
-        return 10;
-    }
-
-    /**
-     * @test
-     */
-    public function tryToCheckIfASuperColdTemperatureIsSuperColdWithAnomClass()
-    {
-        $temperature =
-        $coldThreshold = new ColdThreshold();
-
-        $this->assertTrue(
-            Temperature::take(4)->isSuperCold(
-                new class implements ColdThresholdSource {
-                    public function getThreshold(): int
-                    {
-                        return 10;
-                    }
-                }
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function tryToCreateATemperatureFromStation()
-    {
-        $this->assertSame(
-            50,
-            Temperature::fromStation(
-                $this
-            )->measure()
-        );
-    }
-
-    public function sensor()
-    {
-        return $this;
-    }
-
-    public function temperature()
-    {
-        return $this;
-    }
-
-    public function measure()
-    {
-        return 50;
     }
 
     /**
@@ -156,14 +113,14 @@ class TemperatureTest extends PHPUnit_Framework_TestCase implements ColdThreshol
      */
     public function tryToSumTwoMeasures()
     {
-        $a = Temperature::take(50);
-        $b = Temperature::take(50);
+        $temperature1 = Temperature::take(50);
+        $temperature2 = Temperature::take(50);
 
-        $c = $a->add($b);
+        $total = $temperature1->add($temperature2);
 
-        $this->assertSame(100, $c->measure());
-        $this->assertNotSame($c, $a);
-        $this->assertNotSame($c, $b);
+        $this->assertSame(100, $total->getMeasure());
+        $this->assertNotSame($total, $temperature1);
+        $this->assertNotSame($total, $temperature2);
     }
 
 }

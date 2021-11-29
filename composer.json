@@ -6,7 +6,8 @@
 
   "require": {
     "php": "7.0.*",
-    "ext-sqlite3": "*"
+    "ext-sqlite3": "*",
+    "pimple/pimple": "^3.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^5"
