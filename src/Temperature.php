@@ -1,30 +1,44 @@
 <?php
 
-
 namespace PH;
-
 
 use SQLite3;
 
 class Temperature
 {
-    private $measure;
+    /**
+     * @var int
+     */
+    private int $measure;
 
-    public function __construct($measure)
+    /**
+     * @throws TemperatureNegativeException
+     */
+    private function __construct($measure)
     {
-        if ($measure >= 0) {
-            $this->measure = $measure;
-
-        } else {
-            throw new TemperatureNegativeException("Measure should be positive");
-        }
-
+        $this->setMeasure($measure);
     }
 
+    /**
+     * @throws TemperatureNegativeException
+     */
     public function setMeasure($measure)
     {
+        $this->checkMeasureIsPositive($measure);
 
         $this->measure = $measure;
+    }
+
+    /**
+     * @param $measure
+     * @return void
+     * @throws TemperatureNegativeException
+     */
+    public function checkMeasureIsPositive($measure): void
+    {
+        if ($measure < 0) {
+            throw TemperatureNegativeException::fromMeasure($measure);
+        }
     }
 
     public function measure()
@@ -34,20 +48,28 @@ class Temperature
 
     public function isSuperHot()
     {
-        $bd = new SQLite3('tests/db/temperature.db');
-        $threshold = $bd->querySingle('SELECT hot_threshold FROM configure');
+        $threshold = $this->getThreshold();
 
         return $this->measure() > $threshold;
-
     }
 
     public function isSuperCold(ColdThresholdSource $coldThresholdSource)
     {
         $threshold = $coldThresholdSource->getThreshold();
-        return $this->measure() < $threshold;
 
+        return $this->measure() < $threshold;
     }
 
+    private function getThreshold()
+    {
+        $bd = new SQLite3('tests/db/temperature.db');
+        return $bd->querySingle('SELECT hot_threshold FROM configure');
+    }
+
+    public static function take($measure): self
+    {
+        return new self($measure);
+    }
 
     public static function fromStation($station)
     {
@@ -58,10 +80,10 @@ class Temperature
     }
 
 
-    public function add($temperatureForAdd)
+    public function add(self $temperatureForAdd): self
     {
-        $sum = $this->measure + $temperatureForAdd->measure;
-        $this->setMeasure($sum);
+        return new self(
+            $this->measure() + $temperatureForAdd->measure()
+        );
     }
-
 }
