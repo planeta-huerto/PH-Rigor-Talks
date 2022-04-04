@@ -6,9 +6,10 @@ namespace PH\Tests;
 use PH\ColdThreshold;
 use PH\Temperature;
 use PH\TemperatureNegativeException;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_TestCase;
 
-class TemperatureTest extends PHPUnit_Framework_TestCase
+class TemperatureTest extends TestCase
 {
     /**
      * @test
