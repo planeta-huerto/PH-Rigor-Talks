@@ -6,7 +6,8 @@
 
   "require": {
     "php": ">=8",
-    "ext-sqlite3": "*"
+    "ext-sqlite3": "*",
+    "guzzlehttp/guzzle": "^7.0"
   },
   "require-dev": {
     "phpunit/phpunit": "*"

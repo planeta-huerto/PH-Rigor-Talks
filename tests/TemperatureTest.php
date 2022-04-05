@@ -3,10 +3,12 @@
 
 namespace PH\Tests;
 
+use PH\Date\Domain\Date;
 use PH\Temperature\Domain\Temperature;
 use PH\Temperature\Domain\TemperatureNegativeException;
 use PH\Temperature\Infrastructure\Repository\ColdThresholdRepository;
 use PH\Temperature\Infrastructure\Repository\HotThresholdRepository;
+use PH\Temperature\Infrastructure\Service\ApiAemet;
 use PHPUnit\Framework\TestCase;
 
 class TemperatureTest extends TestCase
@@ -122,5 +124,53 @@ class TemperatureTest extends TestCase
         $this->assertSame(100, $c->measure());
         $this->assertNotSame($c, $a);
         $this->assertNotSame($c, $b);
+    }
+
+    /**
+     * @test
+     */
+    public function tryToGetClimatologicalValuesByDatesAndStation()
+    {
+        $apiAemet = new ApiAemet();
+
+        $data = $apiAemet->getClimatologicalValuesByDatesAndStation(
+            Date::createFromString('2022-03-01'),
+            Date::createFromString('2022-03-02'),
+            '7247X'
+        );
+
+        $this->assertSame('https://opendata.aemet.es/opendata/sh/2ddde596', $data);
+    }
+
+    /**
+     * @test
+     */
+    public function tryToGetClimatologicalValuesByDatesAndStationWithNoValidDates()
+    {
+        $this->expectException(\Exception::class);
+
+        $apiAemet = new ApiAemet();
+
+        $apiAemet->getClimatologicalValuesByDatesAndStation(
+            Date::createFromString('2022-03-03'),
+            Date::createFromString('2022-03-02'),
+            $apiAemet::ALICANTE_STATION
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function tryToGetClimatologicalValuesByDatesAndStationWithWrongStation()
+    {
+        $this->expectException(\Exception::class);
+
+        $apiAemet = new ApiAemet();
+
+        $apiAemet->getClimatologicalValuesByDatesAndStation(
+            Date::createFromString('2022-03-01'),
+            Date::createFromString('2022-03-02'),
+            $apiAemet::ALICANTE_STATION . 'X'
+        );
     }
 }
