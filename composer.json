@@ -7,7 +7,8 @@
   "require": {
     "php": ">=8",
     "ext-sqlite3": "*",
-    "guzzlehttp/guzzle": "^7.0"
+    "guzzlehttp/guzzle": "^7.0",
+    "symfony/console": "^6.0"
   },
   "require-dev": {
     "phpunit/phpunit": "*"
