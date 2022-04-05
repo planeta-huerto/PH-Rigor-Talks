@@ -3,15 +3,13 @@
 
 namespace PH\Tests;
 
-use PH\ColdThreshold;
-use PH\ColdThresholdSource;
-use PH\Temperature;
-use PH\TemperatureNegativeException;
-use PH\TemperatureTestClass;
+use PH\Temperature\Domain\Temperature;
+use PH\Temperature\Domain\TemperatureNegativeException;
+use PH\Temperature\Infrastructure\Repository\ColdThresholdRepository;
+use PH\Temperature\Infrastructure\Repository\HotThresholdRepository;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_TestCase;
 
-class TemperatureTest extends TestCase implements ColdThresholdSource
+class TemperatureTest extends TestCase
 {
     /**
      * @test
@@ -46,36 +44,30 @@ class TemperatureTest extends TestCase implements ColdThresholdSource
     /**
      * @test
      */
-    public function tryToCheckIfAColdTemperatureIsSuperHot()
+    public function tryToCheckIfASuperHotTemperatureIsSuperHot()
     {
-        $temperature = TemperatureTestClass::take(105);
         $this->assertTrue(
-            $temperature->isSuperHot()
+            (new HotThresholdRepository())->isSuperHot(Temperature::take(105))
         );
     }
 
     /**
      * @test
      */
-    public function tryToCheckIfAColdTemperatureNotIsSuperHot()
+    public function tryToCheckIfATemperatureNotIsSuperHot()
     {
-        $temperature = TemperatureTestClass::take(50);
         $this->assertFalse(
-            $temperature->isSuperHot()
+            (new HotThresholdRepository())->isSuperHot(Temperature::take(50))
         );
     }
 
     /**
      * @test
      */
-    public function tryToCheckIfAColdTemperatureNotIsSuperCold()
+    public function tryToCheckIfATemperatureNotIsSuperCold()
     {
-        $temperature = Temperature::take(10);
-
         $this->assertFalse(
-            $temperature->isSuperCold(
-                $this
-            )
+            (new ColdThresholdRepository())->isSuperCold(Temperature::take(10))
         );
     }
 
@@ -84,15 +76,10 @@ class TemperatureTest extends TestCase implements ColdThresholdSource
      */
     public function tryToCheckIfAColdTemperatureIsSuperCold()
     {
-        $temperature = Temperature::take(2);
-
         $this->assertTrue(
-            $temperature->isSuperCold(
-                $this
-            )
+            (new ColdThresholdRepository())->isSuperCold(Temperature::take(2))
         );
     }
-
 
     /**
      * @test
@@ -135,10 +122,5 @@ class TemperatureTest extends TestCase implements ColdThresholdSource
         $this->assertSame(100, $c->measure());
         $this->assertNotSame($c, $a);
         $this->assertNotSame($c, $b);
-    }
-
-    public function getThreshold()
-    {
-        return 5;
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
-namespace PH;
-
+namespace PH\Temperature\Domain;
 
 use Exception;
 
@@ -10,6 +8,8 @@ class TemperatureNegativeException extends Exception
 {
     public static function fromMeasure($measure): self
     {
-        return new self("Measure should be positive");
+        return new self(sprintf(
+            'Measure %s must be positive', $measure
+        ));
     }
 }
