@@ -3,12 +3,15 @@
 
 namespace PH\Tests;
 
-use PH\ColdThreshold;
-use PH\Temperature;
-use PH\TemperatureNegativeException;
-use PHPUnit_Framework_TestCase;
+use PH\Temperature\Application\IsSuperCold;
+use PH\Temperature\Application\IsSuperHot;
+use PH\Temperature\Domain\Temperature;
+use PH\Temperature\Domain\TemperatureNegativeException;
+use PH\Temperature\Domain\ThresholdSource;
+use PHPUnit\Framework\TestCase;
 
-class TemperatureTest extends PHPUnit_Framework_TestCase
+
+class TemperatureTest extends TestCase implements ThresholdSource
 {
     /**
      * @test
@@ -21,11 +24,23 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function tryToCreateAValidTemperatureNamedWithConstructor()
+    {
+        $measure = 18;
+        $this->assertSame(
+            $measure,
+            (Temperature::take($measure))->measure()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function tryToCreateANonValidTemperature()
     {
         $this->expectException(TemperatureNegativeException::class);
 
-        new Temperature(-1);
+        Temperature::take(-1);
     }
 
     /**
@@ -36,7 +51,19 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
         $measure = 18;
         $this->assertSame(
             $measure,
-            (new Temperature($measure))->measure()
+            (Temperature::take($measure))->measure()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function tryToGetTemperature()
+    {
+        $temperature = Temperature::take(105);
+        $definedTemperature = $temperature;
+        $this->assertEquals(
+            $temperature, $definedTemperature
         );
     }
 
@@ -45,9 +72,27 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function tryToCheckIfAColdTemperatureIsSuperHot()
     {
-        $temperature = new Temperature(105);
+        $temperature = Temperature::take(10);
+        $threshold = ThresholdTestClass::take(50);
+        $isSuperHot = new IsSuperHot($temperature, $threshold);
+
+        $this->assertFalse(
+            $isSuperHot()
+        );
+
+    }
+
+    /**
+     * @test
+     */
+    public function tryToCheckIfASuperHotTemperatureIsSuperHot()
+    {
+        $temperature = Temperature::take(100);
+        $threshold = ThresholdTestClass::take(50);
+        $isSuperHot = new IsSuperHot($temperature, $threshold);
+
         $this->assertTrue(
-            $temperature->isSuperHot()
+            $isSuperHot()
         );
     }
 
@@ -56,39 +101,41 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function tryToCheckIfAColdTemperatureNotIsSuperHot()
     {
-        $temperature = new Temperature(50);
+        $temperature = Temperature::take(10);
+        $threshold = ThresholdTestClass::take(50);
+        $isSuperHot = new IsSuperHot($temperature, $threshold);
+
         $this->assertFalse(
-            $temperature->isSuperHot()
+            $isSuperHot()
         );
     }
+
+    /**
+     * @test
+     */
+    public function tryToCheckIfASuperColdTemperatureIsSuperCold()
+    {
+        $temperature = Temperature::take(10);
+        $threshold = ThresholdTestClass::take(50);
+        $isSuperHot = new IsSuperHot($temperature, $threshold);
+
+        $this->assertFalse(
+            $isSuperHot()
+        );
+    }
+
 
     /**
      * @test
      */
     public function tryToCheckIfAColdTemperatureNotIsSuperCold()
     {
-        $temperature = new Temperature(10);
-        $coldThreshold = new ColdThreshold();
+        $temperature = Temperature::take(100);
+        $threshold = ThresholdTestClass::take(50);
+        $isSuperCold = new IsSuperCold($temperature, $threshold);
 
         $this->assertFalse(
-            $temperature->isSuperCold(
-                $coldThreshold
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function tryToCheckIfAColdTemperatureIsSuperCold()
-    {
-        $temperature = new Temperature(2);
-        $coldThreshold = new ColdThreshold();
-
-        $this->assertTrue(
-            $temperature->isSuperCold(
-                $coldThreshold
-            )
+            $isSuperCold()
         );
     }
 
@@ -100,21 +147,53 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped();
 
+        $this->assertSame(
+            50,
+            Temperature::fromStation(
+                $this
+            )->measure()
+        );
     }
+
+
+    public function sensor()
+    {
+        return $this;
+    }
+
+
+    public function temperature()
+    {
+        return $this;
+    }
+
+
+    public function measure()
+    {
+        return 50;
+    }
+
 
     /**
      * @test
      */
     public function tryToSumTwoMeasures()
     {
-        $a = new Temperature(50);
-        $b = new Temperature(50);
+        $a = Temperature::take(50);
+        $b = Temperature::take(50);
 
-        $a->add($b);
+        $c = $a->add($b);
 
-        echo "ESto" . $a->measure();
-        $this->assertSame(100, $a->measure());
+        $this->assertSame(100, $c->measure());
+        $this->assertNotSame($c, $b);
+        $this->assertNotSame($c, $a);
 
     }
+
+    public function getThreshold(): int
+    {
+        return 50;
+    }
+
 
 }
