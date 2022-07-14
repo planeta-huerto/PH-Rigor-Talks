@@ -13,7 +13,7 @@ Cuando lo tengas realizado, puedes marcar los en el README de este modo.
 ### DESCARGA EL REPOSITORIO
 
 Tareas:
-- [ ] Clona el repositorio [Repositorio en GitHub](https://github.com/planetahuerto/rigortalks)
+- [ ] Clona el repositorio [Repositorio en GitHub](https://github.com/planeta-huerto/PH-Rigor-Talks)
 - [ ] Crea una rama con tu nombre. (Ejemplo “marcos-ph”)
 
 ### ORGANIZACIÓN DEL CÓDIGO
